@@ -1,0 +1,40 @@
+<form [formGroup]="experienceForm" class="experience-form">
+  <div formArrayName="jobs">
+    <div *ngFor="let job of jobs.controls; let i = index" class="job-card" [formGroupName]="i">
+      <div class="job-header">Job {{ i + 1 }}</div>
+      <mat-form-field class="form-field">
+        <input matInput formControlName="companyName" placeholder="Company Name">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput formControlName="companyWebsite" placeholder="Company Website">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <textarea matInput formControlName="companyDescription" placeholder="Company Description"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="add-position-btn" (click)="addPosition(i)">Add Position</button>
+      <div formArrayName="positions">
+        <div *ngFor="let position of positions(i).controls; let j = index" class="position-card" [formGroupName]="j">
+          <div class="position-header">Position {{ j + 1 }}</div>
+          <mat-form-field class="form-field">
+            <input matInput formControlName="positionName" placeholder="Position Name">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Position Level</mat-label>
+            <mat-select formControlName="positionLevel">
+              <mat-option *ngFor="let level of getPositionLevels()" [value]="level">{{ level }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <textarea matInput formControlName="positionDescription" placeholder="Position Description"></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="warn" class="remove-position-btn" (click)="removePosition(i, j)">
+            Remove Position
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-container">
+    <button mat-raised-button color="accent" class="add-job-btn" (click)="addJob()">Add Job</button>
+  </div>
+</form>

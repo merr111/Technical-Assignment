@@ -1,0 +1,21 @@
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.calendar-card {
+  width: 300px;
+}
+
+::ng-deep.mat-calendar-header {
+  display: none;
+}
+::ng-deep.highlighted-date {
+  .mat-calendar-body-cell-content {
+    background-color: red;
+    border-radius: 100%;
+    color: white;
+  }
+}
